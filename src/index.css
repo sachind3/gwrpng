@@ -4,6 +4,16 @@
 
 @layer base {
   body {
-    @apply bg-slate-100
+    background-image: url('./assets/bg-pattern.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    @apply bg-slate-100 h-screen
+  }
+  header {
+    background-image: url('./assets/header-pattern.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center right;
   }
 }
