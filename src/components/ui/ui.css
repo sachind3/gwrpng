@@ -10,7 +10,7 @@
         @apply mb-1 inline-block text-sm
     }
     .form-control {
-        @apply w-full block px-3 py-1.5 rounded-none ring-1 ring-inset ring-gray-300 focus:ring-1 focus:ring-inset focus:ring-gray-600 outline-none;
+        @apply w-full block px-3 py-1.5 rounded-none border border-gray-300 ring-1 ring-inset ring-gray-300 focus:ring-1 focus:ring-inset focus:ring-gray-600 outline-none;
     }
     select.form-control {
         background-position: 100% center;

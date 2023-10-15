@@ -34,7 +34,10 @@ export default function PicModal({ openPic, setOpenPic }) {
           <div className="relative z-10" style={{ minWidth: "250px" }}>
             <div className="bg-white shadow rounded">
               <div className="p-4 text-center">
-                <label className="btn overflow-hidden" htmlFor="browsePhoto">
+                <label
+                  className="btn overflow-hidden bg-blue-600 text-white"
+                  htmlFor="browsePhoto"
+                >
                   Select photo
                   <input
                     type="file"
@@ -82,12 +85,16 @@ export default function PicModal({ openPic, setOpenPic }) {
                   <>
                     <div className="space-x-4 text-center mb-3">
                       <button
-                        className="btn"
+                        className="btn bg-blue-600 text-white"
                         onClick={() => cropperRef.current.cropper.rotate(90)}
                       >
                         Rotate
                       </button>
-                      <button onClick={cropImg} type="button" className="btn">
+                      <button
+                        onClick={cropImg}
+                        type="button"
+                        className="btn bg-blue-600 text-white"
+                      >
                         Use Photo
                       </button>
                     </div>
