@@ -105,7 +105,7 @@ export default function PicModal({ openPic, setOpenPic }) {
           </div>
           <div
             className="w-full h-full fixed top-0 left-0"
-            onClick={() => setShow(false)}
+            onClick={() => setOpenPic({ show: false, image: null })}
           ></div>
         </div>
       )}

@@ -2,20 +2,90 @@ import { useContext, useState } from "react";
 import { Button, Container, Input, Select } from "../components/ui";
 import toast from "react-hot-toast";
 import { AppContext } from "../context";
+import axios from "axios";
+import { urltoFile } from "../utils";
 
 const Home = () => {
-  const { openPic, setOpenPic } = useContext(AppContext);
+  const { openPic, setOpenPic, setIsLoading } = useContext(AppContext);
   const [user, setUser] = useState({
-    fullName: "",
+    designation: "",
+    participant_name: "",
+    emp_name: "",
+    area: "",
+    zone: "",
     city: "",
     cluster: "",
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success("Success");
+    uploadData();
   };
+
+  async function uploadData() {
+    setIsLoading(true);
+    let file = await urltoFile(openPic.image, "image.jpeg");
+    let convertedImg = new FormData();
+    convertedImg.append("upload_file", file);
+    try {
+      const res = await axios.post(
+        "https://backend-pandggwr.solmc.in/file_upload.php",
+        convertedImg,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (res.status === 200) {
+        uploadInfo(res.data.filename);
+      }
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.message);
+      console.log(error);
+    }
+  }
+
+  async function uploadInfo(filename) {
+    try {
+      const res = await axios.post(
+        "https://backend-pandggwr.solmc.in/index.php",
+        {
+          operation: "save",
+          emp_name: "",
+          zone: user.zone,
+          area: user.area,
+          participant_name: `${user.designation} ${user.participant_name}`,
+          city: user.city,
+          cluster: user.cluster,
+          photo_url: filename,
+        }
+      );
+      if (res.status === 200) {
+        setIsLoading(false);
+        toast.success("Data Successfully uploaded");
+        setUser({
+          designation: "",
+          participant_name: "",
+          emp_name: "",
+          area: "",
+          zone: "",
+          city: "",
+          cluster: "",
+        });
+        setOpenPic({ show: false, image: null });
+      }
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.message);
+      console.log(error);
+    }
+  }
   const isValid = [
-    user.fullName.trim().length,
+    user.designation.trim().length,
+    user.participant_name.trim().length,
+    // user.emp_name.trim().length,
+    user.area.trim().length,
     user.city.trim().length,
     user.cluster.trim().length,
     openPic.image !== null,
@@ -24,31 +94,57 @@ const Home = () => {
     <section className="py-4">
       <Container>
         <form onSubmit={handleSubmit} className="space-y-3 bg-white p-4 shadow">
-          <Input
-            label={"Full Name"}
+          <Select
+            defaultValue={user.designation}
+            label={"Designation of Participant"}
             value={user.fullName}
-            onChange={(e) => setUser({ ...user, fullName: e.target.value })}
+            onChange={(e) => setUser({ ...user, designation: e.target.value })}
+          >
+            <option value={""} disabled>
+              ---Select---
+            </option>
+            <option value={"Dr."}>Dr.</option>
+            <option value={"Mr."}>Mr.</option>
+            <option value={"Mrs."}>Mrs.</option>
+            <option value={"Ms."}>Ms.</option>
+          </Select>
+          <Input
+            label={"Name of the Participant"}
+            value={user.participant_name}
+            onChange={(e) =>
+              setUser({ ...user, participant_name: e.target.value })
+            }
           />
           <Input
-            label={"City"}
+            label={"Your City"}
             value={user.city}
             onChange={(e) => setUser({ ...user, city: e.target.value })}
           />
+          <Input
+            label={"Your Area"}
+            value={user.area}
+            onChange={(e) => setUser({ ...user, area: e.target.value })}
+          />
+          <Input
+            label={"Your Zone"}
+            value={user.zone}
+            onChange={(e) => setUser({ ...user, zone: e.target.value })}
+          />
           <Select
-            label={"Select Cluster"}
+            label={"Your Cluster"}
             defaultValue={user.cluster}
             onChange={(e) => setUser({ ...user, cluster: e.target.value })}
           >
             <option value={""} disabled>
               ---Select---
             </option>
-            <option value={"clustor 1"}>Clustor 1</option>
-            <option value={"clustor 2"}>Clustor 2</option>
-            <option value={"clustor 3"}>Clustor 3</option>
-            <option value={"clustor 4"}>Clustor 4</option>
-            <option value={"clustor 5"}>Clustor 5</option>
-            <option value={"clustor 6"}>Clustor 6</option>
-            <option value={"clustor 7"}>Clustor 7</option>
+            <option value={"cluster 1"}>Cluster 1</option>
+            <option value={"cluster 2"}>Cluster 2</option>
+            <option value={"cluster 3"}>Cluster 3</option>
+            <option value={"cluster 4"}>Cluster 4</option>
+            <option value={"cluster 5"}>Cluster 5</option>
+            <option value={"cluster 6"}>Cluster 6</option>
+            <option value={"cluster 7"}>Cluster 7</option>
             <option value={"not applicable"}>Not Applicable</option>
           </Select>
 

@@ -3,14 +3,16 @@ import Header from "./Header";
 import PicModal from "./PicModal";
 import { useContext } from "react";
 import { AppContext } from "../context";
+import { Loader } from "./ui";
 
 const Layout = () => {
-  const { openPic, setOpenPic } = useContext(AppContext);
+  const { openPic, setOpenPic, isLoading } = useContext(AppContext);
   return (
     <>
       <Header />
       <Outlet />
       <PicModal openPic={openPic} setOpenPic={setOpenPic} />
+      <Loader isLoading={isLoading} />
     </>
   );
 };
