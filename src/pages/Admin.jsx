@@ -1,19 +1,23 @@
 import { Container } from "../components/ui";
-import LOGO from "./../assets/logo-main.png";
+import {
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 
 const Admin = () => {
   return (
     <>
-      <header className="py-2 bg-white">
-        <Container className={"max-w-7xl flex items-center justify-between"}>
-          <img src={LOGO} alt="logo" width={100} />
+      <section className="py-4">
+        <Container className={"!max-w-7xl"}>
+          <table>
+            <tr>
+              <td>asd</td>
+            </tr>
+          </table>
         </Container>
-      </header>
-      <div className="py-1 bg-sky-600 shadow text-white text-xl text-bold">
-        <Container className={"max-w-7xl text-center"}>
-          Largest online photo album of people wearing a pin badge
-        </Container>
-      </div>
+      </section>
     </>
   );
 };

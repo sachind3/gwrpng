@@ -1,17 +1,23 @@
 import { Route, Routes } from "react-router-dom";
-import Layout from "./components/Layout";
+import AppLayout from "./components/layouts/AppLayout";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 import Gwr from "./pages/Gwr";
+import AdminLayout from "./components/layouts/AdminLayout";
+import GwrLayout from "./components/layouts/GwrLayout";
 
 const App = () => {
   return (
     <Routes>
-      <Route element={<Layout />}>
+      <Route element={<AppLayout />}>
         <Route path="/" element={<Home />} />
       </Route>
-      <Route path="admin" element={<Admin />} />
-      <Route path="gwr" element={<Gwr />} />
+      <Route element={<AdminLayout />}>
+        <Route path="admin" element={<Admin />} />
+      </Route>
+      <Route element={<GwrLayout />}>
+        <Route path="gwr" element={<Gwr />} />
+      </Route>
     </Routes>
   );
 };

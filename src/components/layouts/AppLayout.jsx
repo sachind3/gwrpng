@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
-import PicModal from "./PicModal";
+import PicModal from "../PicModal";
 import { useContext } from "react";
-import { AppContext } from "../context";
-import { Loader } from "./ui";
+import { AppContext } from "../../context";
+import { Loader } from "../ui";
 
-const Layout = () => {
+const AppLayout = () => {
   const { openPic, setOpenPic, isLoading } = useContext(AppContext);
   return (
     <>
@@ -16,4 +16,4 @@ const Layout = () => {
     </>
   );
 };
-export default Layout;
+export default AppLayout;
