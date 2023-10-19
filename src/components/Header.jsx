@@ -11,11 +11,6 @@ const Header = () => {
           </Link>
         </Container>
       </header>
-      <div className="py-1 bg-sky-600 shadow text-white text-sm text-bold">
-        <Container className={"text-center"}>
-          Largest online photo album of people wearing a pin badge
-        </Container>
-      </div>
     </>
   );
 };

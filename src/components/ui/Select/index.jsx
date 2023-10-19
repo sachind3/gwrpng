@@ -1,6 +1,13 @@
 import { useId } from "react";
 
-const Select = ({ label, value, onChange, children, ...props }) => {
+const Select = ({
+  label,
+  value,
+  defaultValue,
+  onChange,
+  children,
+  ...props
+}) => {
   const id = useId();
   return (
     <div className="form-group">
@@ -11,6 +18,7 @@ const Select = ({ label, value, onChange, children, ...props }) => {
       )}
       <select
         id={id}
+        defaultValue={defaultValue}
         value={value}
         onChange={onChange}
         {...props}

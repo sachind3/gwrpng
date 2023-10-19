@@ -4,10 +4,14 @@
 
 @layer base {
   body {
-    background-image: url('./assets/bg-pattern.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    @apply bg-slate-100 h-screen
+    font-family: 'Rubik', sans-serif;
+    background: rgb(57,172,228);
+    background: linear-gradient(135deg, rgba(57,172,228,1) 0%, rgba(0,96,174,1) 100%);
+    @apply h-full ;
+  }
+}
+@layer utilities {
+  #root {
+    @apply min-h-screen
   }
 }
