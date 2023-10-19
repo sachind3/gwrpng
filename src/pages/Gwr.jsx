@@ -29,7 +29,7 @@ const Gwr = () => {
     <>
       <section className="py-6">
         <Container className={"!max-w-7xl"}>
-          {data.length && (
+          {data.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4">
               <Fancybox>
                 {data.map((item) => {
@@ -53,6 +53,8 @@ const Gwr = () => {
                 })}
               </Fancybox>
             </div>
+          ) : (
+            "No data found"
           )}
         </Container>
       </section>
