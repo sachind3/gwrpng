@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useTable, usePagination } from "react-table";
+import { Button, Input, Select } from "./ui";
 
 const TableWithPagination = ({ data, columns, updateMyData }) => {
   const [pageIndexInput, setPageIndexInput] = useState(1);
@@ -80,27 +81,39 @@ const TableWithPagination = ({ data, columns, updateMyData }) => {
           })}
         </tbody>
       </table>
-      <div className="pagination">
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          Previous
-        </button>
-        <span>
-          Page{" "}
-          <strong>
-            {pageIndex + 1} of {pageCount}
-          </strong>{" "}
-        </span>
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          Next
-        </button>
-        <span>
+      <div className="pagination mt-4 flex gap-6 items-center">
+        <div className="flex gap-3 items-center">
+          <Button
+            onClick={() => previousPage()}
+            disabled={!canPreviousPage}
+            className="btn bg-blue-600 text-white"
+          >
+            Previous
+          </Button>
+          <span>
+            Page{" "}
+            <strong>
+              {pageIndex + 1} of {pageCount}
+            </strong>{" "}
+          </span>
+          <Button
+            onClick={() => nextPage()}
+            disabled={!canNextPage}
+            className="btn bg-blue-600 text-white"
+          >
+            Next
+          </Button>
+        </div>
+        <div className="flex items-center gap-2">
           Go to page:
-          <input
+          <Input
+            className="!w-14"
             type="number"
             value={pageIndexInput}
             onChange={(e) => setPageIndexInput(e.target.value)}
           />
-          <button
+          <Button
+            className="btn bg-blue-600 text-white"
             onClick={() => {
               const pageNumber = parseInt(pageIndexInput, 10);
               if (
@@ -113,11 +126,11 @@ const TableWithPagination = ({ data, columns, updateMyData }) => {
             }}
           >
             Go
-          </button>
-        </span>
-        <span>
+          </Button>
+        </div>
+        <div className="flex items-center gap-2">
           Show{" "}
-          <select
+          <Select
             value={pageSize}
             onChange={(e) => {
               setPageSizeManual(Number(e.target.value));
@@ -128,9 +141,9 @@ const TableWithPagination = ({ data, columns, updateMyData }) => {
                 {size}
               </option>
             ))}
-          </select>{" "}
+          </Select>
           entries
-        </span>
+        </div>
         <span>Total Entries: {totalEntries}</span>
       </div>
     </div>

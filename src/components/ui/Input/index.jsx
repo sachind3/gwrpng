@@ -1,5 +1,12 @@
 import { useId } from "react";
-const Input = ({ label, type = "text", value, onChange, ...props }) => {
+const Input = ({
+  className,
+  label,
+  type = "text",
+  value,
+  onChange,
+  ...props
+}) => {
   const id = useId();
   return (
     <div className="form-group">
@@ -11,7 +18,7 @@ const Input = ({ label, type = "text", value, onChange, ...props }) => {
       <input
         type={type}
         id={id}
-        className="form-control"
+        className={className ? `form-control ${className}` : "form-control"}
         value={value}
         onChange={onChange}
         {...props}

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 
@@ -26,7 +26,9 @@ export default function PicModal({ openPic, setOpenPic }) {
         .getCroppedCanvas()
         .toDataURL("image/jpeg"),
     });
+    setSrc(null);
   }, [openPic, setOpenPic]);
+
   return (
     <>
       {openPic.show && (
