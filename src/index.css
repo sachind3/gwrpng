@@ -14,4 +14,10 @@
   #root {
     @apply min-h-screen
   }
+  table {
+    @apply border-collapse w-full
+  }
+  td, th {
+    @apply border px-3 py-1
+  }
 }

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AppContext } from "../../context";
+import { AdminState, AppContext } from "../../context";
 import { Outlet } from "react-router-dom";
 import { Loader } from "../ui";
 import GwrHeader from "./GwrHeader";
@@ -9,7 +9,9 @@ const AdminLayout = () => {
   return (
     <>
       <GwrHeader />
-      <Outlet />
+      <AdminState>
+        <Outlet />
+      </AdminState>
       <Loader isLoading={isLoading} />
     </>
   );
