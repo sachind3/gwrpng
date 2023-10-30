@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { AppContext } from "../context";
 import axios from "axios";
 import { urltoFile } from "../utils";
+import { Check } from "lucide-react";
 
 const Home = () => {
   const { openPic, setOpenPic, setIsLoading } = useContext(AppContext);
@@ -16,6 +17,7 @@ const Home = () => {
     zone: "",
     city: "",
     cluster: "",
+    consent: false,
   });
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +55,7 @@ const Home = () => {
         "https://backend-pandggwr.solmc.in/index.php",
         {
           operation: "save",
-          emp_name: "",
+          emp_name: user.emp_name,
           zone: user.zone,
           area: user.area,
           participant_name: `${user.designation} ${user.participant_name}`,
@@ -73,6 +75,7 @@ const Home = () => {
           zone: "",
           city: "",
           cluster: "",
+          consent: false,
         });
         setOpenPic({ show: false, image: null });
         userForm.current.reset();
@@ -84,14 +87,25 @@ const Home = () => {
     }
   }
   const isValid = [
+    user.emp_name.trim().length,
     user.designation.trim().length,
+    user.participant_name.trim().length,
     user.participant_name.trim().length,
     user.area.trim().length,
     user.city.trim().length,
     user.cluster.trim().length,
     openPic.image !== null,
+    user.consent === true,
   ].every(Boolean);
-  console.log(user);
+  // console.log(user);
+
+  const toggleConsent = () => {
+    if (user.consent) {
+      setUser({ ...user, consent: !user.consent });
+    } else {
+      setUser({ ...user, consent: !user.consent });
+    }
+  };
   return (
     <>
       <section className="pt-3">
@@ -108,6 +122,11 @@ const Home = () => {
             className="space-y-3 p-4"
             ref={userForm}
           >
+            <Input
+              placeholder={"Your Full Name"}
+              value={user.emp_name}
+              onChange={(e) => setUser({ ...user, emp_name: e.target.value })}
+            />
             <Select
               defaultValue={user.designation}
               placeholder={"Designation of Participant"}
@@ -210,6 +229,21 @@ const Home = () => {
                 </div>
               </div>
             )}
+            <div className="form-group">
+              <label
+                htmlFor="consentCheck"
+                className="text-sm text-white flex gap-2"
+                onClick={toggleConsent}
+              >
+                <i className="w-4 h-4 bg-transparent border border-white shrink-0 flex items-center justify-center">
+                  {user.consent && <Check />}
+                </i>
+                <p className="leading-4">
+                  I confirm that the uploaded picture will be used for GWR
+                  participation purpose only.
+                </p>
+              </label>
+            </div>
             <div className="text-center">
               <Button
                 type="submit"
