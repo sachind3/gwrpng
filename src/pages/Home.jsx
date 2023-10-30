@@ -122,11 +122,6 @@ const Home = () => {
             className="space-y-3 p-4"
             ref={userForm}
           >
-            <Input
-              placeholder={"Your Full Name"}
-              value={user.emp_name}
-              onChange={(e) => setUser({ ...user, emp_name: e.target.value })}
-            />
             <Select
               defaultValue={user.designation}
               placeholder={"Designation of Participant"}
@@ -149,6 +144,11 @@ const Home = () => {
               onChange={(e) =>
                 setUser({ ...user, participant_name: e.target.value })
               }
+            />
+            <Input
+              placeholder={"Your Full Name"}
+              value={user.emp_name}
+              onChange={(e) => setUser({ ...user, emp_name: e.target.value })}
             />
             <Input
               placeholder={"Your City"}
