@@ -1,10 +1,9 @@
-import TableWithPaginationAdmin from "../components/TableWithPaginationAdmin";
+import TableWithPagination from "../components/TableWithPagination";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { AdminContext } from "../context";
 import { Container } from "../components/ui";
 import Fancybox from "../components/fancybox";
-
-const Admin = () => {
+const Verifier = () => {
   const { records, actionUpdateRecord } = useContext(AdminContext);
 
   const columns = useMemo(
@@ -43,6 +42,20 @@ const Admin = () => {
       {
         Header: "Status",
         accessor: "status",
+        Cell: ({ row, updateMyData }) => {
+          return (
+            <select
+              value={row.values.status}
+              onChange={(e) =>
+                updateMyData(row.index, "status", e.target.value)
+              }
+            >
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          );
+        },
       },
     ],
     []
@@ -64,7 +77,7 @@ const Admin = () => {
       <Container className={"!max-w-7xl"}>
         <div className="bg-white p-4 shadow">
           <Fancybox>
-            <TableWithPaginationAdmin
+            <TableWithPagination
               columns={columns}
               data={myData}
               updateMyData={updateMyData}
@@ -75,4 +88,4 @@ const Admin = () => {
     </section>
   );
 };
-export default Admin;
+export default Verifier;

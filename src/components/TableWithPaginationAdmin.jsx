@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTable, usePagination } from "react-table";
 import { Button, Input, Select } from "./ui";
 
-const TableWithPagination = ({ data, columns, updateMyData }) => {
+const TableWithPaginationAdmin = ({ data, columns, updateMyData }) => {
   const [pageIndexInput, setPageIndexInput] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
@@ -53,27 +53,7 @@ const TableWithPagination = ({ data, columns, updateMyData }) => {
                 <td>{pageIndex * pageSize + index + 1}</td>
                 {row.cells.map((cell) => {
                   return (
-                    <td {...cell.getCellProps()}>
-                      {cell.column.id === "status" ? (
-                        <select
-                          value={cell.value}
-                          onChange={(e) => {
-                            updateMyData(
-                              row.index,
-                              "status",
-                              e.target.value,
-                              row
-                            );
-                          }}
-                        >
-                          <option value="pending">Pending</option>
-                          <option value="approved">Approved</option>
-                          <option value="rejected">Rejected</option>
-                        </select>
-                      ) : (
-                        cell.render("Cell")
-                      )}
-                    </td>
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
               </tr>
@@ -150,4 +130,4 @@ const TableWithPagination = ({ data, columns, updateMyData }) => {
   );
 };
 
-export default TableWithPagination;
+export default TableWithPaginationAdmin;

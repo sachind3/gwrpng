@@ -5,6 +5,7 @@ import Admin from "./pages/Admin";
 import Gwr from "./pages/Gwr";
 import AdminLayout from "./components/layouts/AdminLayout";
 import GwrLayout from "./components/layouts/GwrLayout";
+import Verifier from "./pages/Verifier";
 
 const App = () => {
   return (
@@ -14,6 +15,9 @@ const App = () => {
       </Route>
       <Route element={<AdminLayout />}>
         <Route path="admin" element={<Admin />} />
+      </Route>
+      <Route element={<AdminLayout />}>
+        <Route path="verifier" element={<Verifier />} />
       </Route>
       <Route element={<GwrLayout />}>
         <Route path="gwr" element={<Gwr />} />
