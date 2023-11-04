@@ -1,11 +1,12 @@
+import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import AppLayout from "./components/layouts/AppLayout";
 import Home from "./pages/Home";
-import Admin from "./pages/Admin";
-import Gwr from "./pages/Gwr";
+const Admin = lazy(() => import("./pages/Admin"));
+const Gwr = lazy(() => import("./pages/Gwr"));
+const Verifier = lazy(() => import("./pages/Verifier"));
 import AdminLayout from "./components/layouts/AdminLayout";
 import GwrLayout from "./components/layouts/GwrLayout";
-import Verifier from "./pages/Verifier";
 
 const App = () => {
   return (
