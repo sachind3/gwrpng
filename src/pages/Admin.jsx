@@ -1,8 +1,9 @@
 import TableWithPaginationAdmin from "../components/TableWithPaginationAdmin";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { AdminContext } from "../context";
-import { Container } from "../components/ui";
+import { Button, Container } from "../components/ui";
 import Fancybox from "../components/fancybox";
+import * as XLSX from "xlsx";
 
 const Admin = () => {
   const { records, actionUpdateRecord } = useContext(AdminContext);
@@ -59,10 +60,23 @@ const Admin = () => {
     setMyData(updatedData);
     actionUpdateRecord(row.original.id, value);
   };
+
+  const handleExport = () => {
+    const wb = XLSX.utils.book_new(),
+      ws = XLSX.utils.json_to_sheet(myData);
+    XLSX.utils.book_append_sheet(wb, ws, "MySheet");
+    XLSX.writeFile(wb, "MyExcel.xlsx");
+  };
   return (
     <section className="py-6">
       <Container className={"!max-w-7xl"}>
         <div className="bg-white p-4 shadow">
+          <Button
+            className={"bg-blue-600 text-white mb-4"}
+            onClick={handleExport}
+          >
+            Export Data
+          </Button>
           <Fancybox>
             <TableWithPaginationAdmin
               columns={columns}
