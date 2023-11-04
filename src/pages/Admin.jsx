@@ -15,8 +15,8 @@ const Admin = () => {
         accessor: "participant_name",
       },
       {
-        Header: "Cluster",
-        accessor: "cluster",
+        Header: "Your Full Name",
+        accessor: "emp_name",
       },
       {
         Header: "City",
@@ -29,6 +29,10 @@ const Admin = () => {
       {
         Header: "Zone",
         accessor: "zone",
+      },
+      {
+        Header: "Cluster",
+        accessor: "cluster",
       },
       {
         Header: "Image",
